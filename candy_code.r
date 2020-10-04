@@ -328,4 +328,4 @@ t.test(losers$fruity, winners$fruity)  # p-value .004
 
 # Are there more peanut butter/almond candies in the winners?
 t.test(losers$peanutyalmondy, winners$peanutyalmondy)  # p-value .002
-# There are a lot more winners with almonts or peanut butter
+# There are a lot more winners with almonds or peanut butter
