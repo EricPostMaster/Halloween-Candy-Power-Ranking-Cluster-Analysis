@@ -85,6 +85,10 @@ legend("topleft", title="Legend", legend= c("Chocolate Bars", "Fruity Candy", "C
 ###############  Cluster Profile Function
 #####################################################
 
+
+# I didn't write this awesome function - I got it from Shaina Race, PhD
+# (https://directory.ncsu.edu/directory//moreinfo.php?username=slrace)
+
 clusterProfile = function(df, clusterVar, varsToProfile){
   k = max(df[,clusterVar])
   for(j in varsToProfile){
@@ -175,6 +179,20 @@ par(mfrow=c(3,3))
 clusterProfile(df=losers, clusterVar = 'clusters1', varsToProfile)
 
 
+# Overall Cluster Plot
+losers$clustercolor = ifelse(losers$clusters1 == 1, colors[3],
+                            ifelse(losers$clusters1 == 2, colors[2], colors[1]))
+
+# Plot three clusters based on principal components 1 and 2
+par(mfrow=c(1,1))
+plot(losers.pca$x[,1:2], col= alpha(losers$clustercolor, 0.7) , pch=19, cex=1.8, xlab="Principal Component 1",
+     ylab="Principal Component 2")
+title(main='Halloween Candy Clusters - "Losers"', mar=c(1,0,0,0))
+legend("topright", title="Legend", legend= c("Chocolatey Pieces", "Fruity Candy", "Chocolate Bars") , col=colors, pch=19, cex=.8)
+
+
+
+
 
 ###############  Cluster Profiling - Winners
 
@@ -216,6 +234,19 @@ varsToProfile = c("chocolate", "fruity", "caramel", "peanutyalmondy", "nougat",
                   "pricepercent", "winpercent")
 par(mfrow=c(3,2))
 clusterProfile(df=winners, clusterVar = 'clusters1', varsToProfile)
+
+
+# Overall Cluster Plot
+winners$clustercolor = ifelse(winners$clusters1 == 1, colors[1], colors[2])
+
+# Plot three clusters based on principal components 1 and 2
+par(mfrow=c(1,1))
+plot(winners.pca$x[,1:2], col= alpha(winners$clustercolor, 0.7) , pch=19, cex=1.8, xlab="Principal Component 1",
+     ylab="Principal Component 2")
+title(main='Halloween Candy Clusters - "Winners"', mar=c(1,0,0,0))
+legend("topright", title="Legend", legend= c("Pieces (Choc&Fruit)", "Chocolate Bars") , col=colors, pch=19, cex=.8)
+
+
 
 
 
