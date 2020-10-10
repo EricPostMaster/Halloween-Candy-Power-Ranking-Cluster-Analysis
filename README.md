@@ -21,7 +21,7 @@ To better understand the preferences of mask-clad tricksters that may come knock
 
 I decided to use principal components analysis and k-Means clustering to reduce noise in the overall dataset and make it possible to plot the clusters in two dimensions.  The first two principal components captured 56.7% of the variance in the dataset, so I was confident I would be able to identify some useful clusters.
 
-After a bit of trial and error and consulting the scree plot for PCA, I settled on three clusters for the group.  One of the best parts about clustering is getting to know the stories behind each cluster.  I used Dr. Race’s ClusterProfile function in R (Thanks, Dr. Race!) to plot histograms of each cluster’s variable composition compared to histograms of the overall dataset composition (see below).  In the plots below, the salmon-colored bars represent the variable composition of the cluster, and the purple bars represent variable composition of the overall dataset.
+After a bit of trial and error and consulting the scree plot for PCA, I settled on three clusters for the group.  One of the best parts about clustering is getting to know the stories behind each cluster.  I used Dr. Race’s ClusterProfile function in R (Thanks, Dr. Race!) to plot histograms of each cluster’s variable composition compared to histograms of the overall dataset composition (see example below).  In the plots below, the salmon-colored bars represent the variable composition of the cluster, and the purple bars represent variable composition of the overall dataset.
 
 <p align="center">
 <img src="https://github.com/EricPostMaster/Halloween-Candy-Power-Ranking-Cluster-Analysis/blob/master/cluster_profiles_updated.png" width=60% height=60%>
