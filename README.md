@@ -36,7 +36,7 @@ After coding each of the clusters into a profile group, the final principal comp
 To continue investigating, I subdivided the full dataset into “Winners” and “Losers” datasets based on whether the candies’ win percentages were above or below 50%.  I repeated the PCA and cluster analysis with the following results.
 
 <p align="center">
-<img src="https://github.com/EricPostMaster/Halloween-Candy-Power-Ranking-Cluster-Analysis/blob/master/win_lose_plots.png" width=60% height=60%>
+<img src="https://github.com/EricPostMaster/Halloween-Candy-Power-Ranking-Cluster-Analysis/blob/master/win_lose_plots.png" width=80% height=80%>
 </p>
 
 As you can see, the cluster characteristics of the Losers group are similar to those of the overall dataset.  In the Winners group, there were very few fruity candies, so there were only two major clusters: chocolate bars and pieces (both chocolate and fruit).
