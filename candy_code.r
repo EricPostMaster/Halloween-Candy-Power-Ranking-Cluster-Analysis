@@ -121,7 +121,6 @@ varsToProfile = c("chocolate", "fruity", "caramel", "peanutyalmondy", "nougat",
 par(mfrow=c(3,3))
 clusterProfile(df=candy, clusterVar = 'clusters1', varsToProfile)
 
-
 hc = hclust(dist(clusters1$centers))
 plot(hc)
 
@@ -256,7 +255,7 @@ legend("topright", title="Legend", legend= c("Pieces (Choc&Fruit)", "Chocolate B
 
 cheap_win = winners[order(winners$winpercent),]
 cheap_win[1:3,]
-# Almost Joy, Haribo Sour Bears, Air Heads
+# Almond Joy, Haribo Sour Bears, Air Heads
 
 
 
