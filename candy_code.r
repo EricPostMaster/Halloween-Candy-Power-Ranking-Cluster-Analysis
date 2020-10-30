@@ -89,26 +89,52 @@ legend("topleft", title="Legend", legend= c("Chocolate Bars", "Fruity Candy", "C
 # I didn't write this awesome function - I got it from Shaina Race, PhD
 # (https://directory.ncsu.edu/directory//moreinfo.php?username=slrace)
 
+
+# Adjusted the function to create fewer bins (chubby bars)
 clusterProfile = function(df, clusterVar, varsToProfile){
   k = max(df[,clusterVar])
   for(j in varsToProfile){
     if(is.numeric(df[,j])){
       for(i in 1:k){
-        hist(as.numeric(df[df[,clusterVar]==i ,j ]), breaks=50, freq=F, col=rgb(1,0,0,0.5),
-             xlab=paste(j), ylab="Density", main=paste("Cluster",i, 'vs all data, variable:',j))
-        hist(as.numeric(df[,j ]), breaks=50,freq=F, col=rgb(0,0,1,0.5), xlab="", ylab="Density", add=T)
+        hist(as.numeric(df[df[,clusterVar]==i ,j ]), breaks=5, freq=F, col=rgb(1,0,0,0.5),
+             xlab=paste( tools::toTitleCase(j)), ylab="Density", main=paste("Cluster",i, 'vs All Data'))
+        hist(as.numeric(df[,j ]), breaks=5,freq=F, col=rgb(0,0,1,0.5), xlab="", ylab="Density", add=T)
         
-        legend("topright", bty='n',legend=c(paste("cluster",i),'all observations'), col=c(rgb(1,0,0,0.5),rgb(0,0,1,0.5)), pt.cex=2, pch=15 )}
+        legend("topright", bty='n',legend=c(paste("cluster",i),'all observations'), col=c(rgb(1,0,0,0.5),rgb(0,0,1,0.5)), pt.cex=2, pch=15 )
+        }
     }
     if(is.factor(df[,j])&length(levels(df[,j]))<5){
       (counts = table( df[,j],df[,clusterVar]))
       (counts = counts%*%diag(colSums(counts)^(-1)))
       barplot(counts, main=paste(j, 'by cluster'),
-              xlab=paste(j),legend = rownames(counts), beside=TRUE)
+              xlab=paste(j), legend = rownames(counts), beside=TRUE)
     }
   }
 }
 
+
+
+# This is the original function with 
+# clusterProfile = function(df, clusterVar, varsToProfile){
+#   k = max(df[,clusterVar])
+#   for(j in varsToProfile){
+#     if(is.numeric(df[,j])){
+#       for(i in 1:k){
+#         hist(as.numeric(df[df[,clusterVar]==i ,j ]), breaks=20, freq=F, col=rgb(1,0,0,0.5),
+#              xlab=paste(j), ylab="Density", main=paste("cluster",i, 'vs all data, variable:',j))
+#         hist(as.numeric(df[,j ]), breaks=5,freq=F, col=rgb(0,0,1,0.5), xlab="", ylab="Density", add=T)
+#         
+#         #legend("topright", bty='n',legend=c(paste("cluster",i),'all observations'), col=c(rgb(1,0,0,0.5),rgb(0,0,1,0.5)), pt.cex=2, pch=15 )
+#       }
+#     }
+#     if(is.factor(df[,j])&length(levels(df[,j]))<5){
+#       (counts = table( df[,j],df[,clusterVar]))
+#       (counts = counts%*%diag(colSums(counts)^(-1)))
+#       barplot(counts, main=paste(j, 'by cluster'),
+#               xlab=paste(j), legend = rownames(counts), beside=TRUE)
+#     }
+#   }
+# }
 
 
 ###########################################################
@@ -118,12 +144,9 @@ clusterProfile = function(df, clusterVar, varsToProfile){
 varsToProfile = c("chocolate", "fruity", "caramel", "peanutyalmondy", "nougat",
                   "crispedricewafer", "hard", "bar", "pluribus", "sugarpercent",
                   "pricepercent", "winpercent")
-par(mfrow=c(3,3))
+
+par(mfrow=c(1,1))  # Change this to c(3,3) if you want a grid
 clusterProfile(df=candy, clusterVar = 'clusters1', varsToProfile)
-
-hc = hclust(dist(clusters1$centers))
-plot(hc)
-
 
 
 ###########################################################
