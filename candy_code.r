@@ -86,19 +86,19 @@ legend("topleft", title="Legend", legend= c("Chocolate Bars", "Fruity Candy", "C
 #####################################################
 
 
-# I didn't write this awesome function - I got it from Shaina Race, PhD
+# I didn't write this awesome function, I got it from Shaina Race, PhD.  Comments are my own.
 # (https://directory.ncsu.edu/directory//moreinfo.php?username=slrace)
 
 
 # Adjusted the function to create fewer bins (chubby bars)
 clusterProfile = function(df, clusterVar, varsToProfile){
-  k = max(df[,clusterVar])
-  for(j in varsToProfile){
-    if(is.numeric(df[,j])){
-      for(i in 1:k){
-        hist(as.numeric(df[df[,clusterVar]==i ,j ]), breaks=5, freq=F, col=rgb(1,0,0,0.5),
+  k = max(df[,clusterVar])  # k is the largest number in the cluster column, which is the total number of clusters
+  for(j in varsToProfile){  # for each variable that we want to profile...
+    if(is.numeric(df[,j])){ # if the variable is numeric,
+      for(i in 1:k){        # repeat this loop for each cluster
+        hist(as.numeric(df[df[,clusterVar]==i ,j ]), breaks=5, freq=F, col=rgb(1,0,0,0.5),  # Create histogram of cluster number i in terms of variable j
              xlab=paste( tools::toTitleCase(j)), ylab="Density", main=paste("Cluster",i, 'vs All Data'))
-        hist(as.numeric(df[,j ]), breaks=5,freq=F, col=rgb(0,0,1,0.5), xlab="", ylab="Density", add=T)
+        hist(as.numeric(df[,j ]), breaks=5,freq=F, col=rgb(0,0,1,0.5), xlab="", ylab="Density", add=T)  # Overlay histogram of variable j distribution in total population
         
         legend("topright", bty='n',legend=c(paste("cluster",i),'all observations'), col=c(rgb(1,0,0,0.5),rgb(0,0,1,0.5)), pt.cex=2, pch=15 )
         }
@@ -112,29 +112,6 @@ clusterProfile = function(df, clusterVar, varsToProfile){
   }
 }
 
-
-
-# This is the original function with 
-# clusterProfile = function(df, clusterVar, varsToProfile){
-#   k = max(df[,clusterVar])
-#   for(j in varsToProfile){
-#     if(is.numeric(df[,j])){
-#       for(i in 1:k){
-#         hist(as.numeric(df[df[,clusterVar]==i ,j ]), breaks=20, freq=F, col=rgb(1,0,0,0.5),
-#              xlab=paste(j), ylab="Density", main=paste("cluster",i, 'vs all data, variable:',j))
-#         hist(as.numeric(df[,j ]), breaks=5,freq=F, col=rgb(0,0,1,0.5), xlab="", ylab="Density", add=T)
-#         
-#         #legend("topright", bty='n',legend=c(paste("cluster",i),'all observations'), col=c(rgb(1,0,0,0.5),rgb(0,0,1,0.5)), pt.cex=2, pch=15 )
-#       }
-#     }
-#     if(is.factor(df[,j])&length(levels(df[,j]))<5){
-#       (counts = table( df[,j],df[,clusterVar]))
-#       (counts = counts%*%diag(colSums(counts)^(-1)))
-#       barplot(counts, main=paste(j, 'by cluster'),
-#               xlab=paste(j), legend = rownames(counts), beside=TRUE)
-#     }
-#   }
-# }
 
 
 ###########################################################
